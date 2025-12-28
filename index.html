@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Robert Nagy, PhD - Bio-Data Scientist, Space Health Researcher, and HPC Specialist. Expert in AI/ML pipelines for healthcare and Earth Observation data.">
+    <meta name="theme-color" content="#1a1f2e">
+    <title>Robert Nagy, PhD | Bio-Data Scientist & Space Health Researcher</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Premium Typography: Fraunces (display) + Source Sans 3 (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           CSS Custom Properties - Accessible Color System
+           Based on ColorBrewer safe palettes
+           All combinations meet WCAG 2.2 AA (4.5:1 contrast minimum)
+           ============================================ */
+        :root {
+            /* Primary palette - Blue-based for universal accessibility */
+            --color-bg-primary: #1a1f2e;
+            --color-bg-secondary: #232939;
+            --color-bg-tertiary: #2d3548;
+            --color-bg-elevated: #363f54;
+            
+            /* Text colors - High contrast ratios */
+            --color-text-primary: #f4f4f5;
+            --color-text-secondary: #c4c7ce;
+            --color-text-tertiary: #9498a4;
+            
+            /* Accent - Warm amber/gold (colorblind safe) */
+            --color-accent: #e5a556;
+            --color-accent-muted: rgba(229, 165, 86, 0.15);
+            --color-accent-hover: #f0b665;
+            
+            /* Semantic colors */
+            --color-border: rgba(244, 244, 245, 0.08);
+            --color-border-accent: rgba(229, 165, 86, 0.25);
+            
+            /* Focus ring for accessibility */
+            --color-focus: #5fa8d3;
+            --focus-ring: 0 0 0 3px var(--color-focus);
+            
+            /* Typography scale (1.25 ratio) */
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Source Sans 3', system-ui, sans-serif;
+            
+            --text-xs: 0.8rem;
+            --text-sm: 0.9rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.563rem;
+            --text-3xl: 1.953rem;
+            --text-4xl: 2.441rem;
+            --text-5xl: 3.052rem;
+            
+            /* Spacing scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+            
+            /* Layout */
+            --max-width: 72rem;
+            --content-width: 56rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 400ms ease;
+            
+            /* Borders */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* ============================================
+           Reset & Base Styles
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: var(--text-base);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-primary);
+            overflow-x: hidden;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: var(--space-4);
+            z-index: 9999;
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-accent);
+            color: var(--color-bg-primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: var(--space-4);
+            outline: var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        :focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        :focus:not(:focus-visible) { outline: none; }
+
+        ::selection {
+            background: var(--color-accent);
+            color: var(--color-bg-primary);
+        }
+
+        /* ============================================
+           Typography
+           ============================================ */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+        }
+
+        p { margin-bottom: var(--space-4); }
+        p:last-child { margin-bottom: 0; }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover { color: var(--color-accent-hover); }
+
+        strong {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* ============================================
+           Layout Components
+           ============================================ */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .container--narrow { max-width: var(--content-width); }
+
+        /* ============================================
+           Navigation
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-5) 0;
+            background: transparent;
+            transition: background var(--transition-base), padding var(--transition-base);
+        }
+
+        .nav--scrolled {
+            background: rgba(26, 31, 46, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: var(--space-4) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__logo {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            letter-spacing: 0.02em;
+        }
+
+        .nav__logo span { color: var(--color-accent); }
+
+        .nav__menu {
+            display: flex;
+            gap: var(--space-8);
+            list-style: none;
+        }
+
+        .nav__link {
+            position: relative;
+            color: var(--color-text-secondary);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: var(--space-2) 0;
+            transition: color var(--transition-fast);
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
+        }
+
+        .nav__link:hover,
+        .nav__link:focus { color: var(--color-text-primary); }
+
+        .nav__link:hover::after,
+        .nav__link:focus::after { width: 100%; }
+
+        .nav__toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-1);
+        }
+
+        .nav__toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--color-text-primary);
+            transition: transform var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        .nav__toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .nav__toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============================================
+           Hero Section
+           ============================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero__media {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .hero__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+        }
+
+        .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(26, 31, 46, 0.4) 0%,
+                rgba(26, 31, 46, 0.6) 50%,
+                rgba(26, 31, 46, 1) 100%
+            );
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: var(--space-8);
+            max-width: 800px;
+        }
+
+        .hero__title {
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-5xl));
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-4);
+            color: var(--color-text-primary);
+        }
+
+        .hero__subtitle {
+            font-family: var(--font-body);
+            font-size: var(--text-lg);
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: var(--space-6);
+        }
+
+        .hero__description {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero__scroll {
+            position: absolute;
+            bottom: var(--space-10);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-text-tertiary);
+            font-size: var(--text-xs);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .hero__scroll-icon {
+            width: 24px;
+            height: 36px;
+            border: 2px solid var(--color-text-tertiary);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .hero__scroll-icon::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 2px;
+            animation: scroll-hint 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-hint {
+            0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.3; transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================
+           Main Content & Sections
+           ============================================ */
+        .main { position: relative; z-index: 1; }
+
+        .section { padding: var(--space-20) 0; }
+        .section--border { border-top: 1px solid var(--color-border); }
+
+        .section__header { margin-bottom: var(--space-12); }
+
+        .section__label {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: var(--space-3);
+        }
+
+        .section__title {
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-text-primary);
+        }
+
+        /* ============================================
+           Summary Section
+           ============================================ */
+        .summary {
+            font-size: var(--text-lg);
+            line-height: 1.9;
+            color: var(--color-text-secondary);
+        }
+
+        .summary strong { color: var(--color-text-primary); }
+
+        /* ============================================
+           Skills Grid
+           ============================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+        }
+
+        .skill-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: border-color var(--transition-base), transform var(--transition-base);
+        }
+
+        .skill-card:hover,
+        .skill-card:focus-within {
+            border-color: var(--color-border-accent);
+            transform: translateY(-2px);
+        }
+
+        .skill-card__header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        .skill-card__icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-muted);
+            border-radius: var(--radius-md);
+            color: var(--color-accent);
+        }
+
+        .skill-card__icon svg { width: 20px; height: 20px; }
+
+        .skill-card__title {
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+
+        .skill-card:hover .skill-tag {
+            background: var(--color-accent-muted);
+            color: var(--color-text-primary);
+        }
+
+        /* ============================================
+           Timeline (Experience)
+           ============================================ */
+        .timeline { position: relative; }
+
+        .timeline__item {
+            position: relative;
+            padding-left: var(--space-10);
+            padding-bottom: var(--space-12);
+        }
+
+        .timeline__item:last-child { padding-bottom: 0; }
+
+        .timeline__item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-border) 100%);
+        }
+
+        .timeline__item:last-child::before { display: none; }
+
+        .timeline__marker {
+            position: absolute;
+            left: -5px;
+            top: 6px;
+            width: 11px;
+            height: 11px;
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .timeline__header { margin-bottom: var(--space-4); }
+
+        .timeline__title {
+            font-size: var(--text-xl);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .timeline__meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--space-2) var(--space-4);
+        }
+
+        .timeline__company {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        .timeline__date {
+            font-size: var(--text-sm);
+            color: var(--color-text-tertiary);
+        }
+
+        .timeline__content { color: var(--color-text-secondary); }
+
+        .timeline__intro {
+            margin-bottom: var(--space-5);
+            font-size: var(--text-base);
+        }
+
+        /* Project Cards within Timeline */
+        .project-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .project-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-5);
+            transition: border-color var(--transition-base);
+        }
+
+        .project-card:hover { border-color: var(--color-border-accent); }
+
+        .project-card__title {
+            font-family: var(--font-display);
+            font-size: var(--text-base);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .project-card__description {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-3);
+        }
+
+        .project-card__description:last-child { margin-bottom: 0; }
+
+        .project-card__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .project-card__tag {
+            font-size: var(--text-xs);
+            padding: var(--space-1) var(--space-2);
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-sm);
+            color: var(--color-text-tertiary);
+        }
+
+        /* ============================================
+           Education Grid
+           ============================================ */
+        .education-grid { display: grid; gap: var(--space-6); }
+
+        .education-card {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: var(--space-6);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: border-color var(--transition-base);
+        }
+
+        .education-card:hover,
+        .education-card:focus-within { border-color: var(--color-border-accent); }
+
+        .education-card__year {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 300;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .education-card__degree {
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .education-card__institution {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
+        }
+
+        .education-card__detail {
+            font-size: var(--text-sm);
+            color: var(--color-text-tertiary);
+            line-height: 1.7;
+        }
+
+        .education-card__detail strong { color: var(--color-text-secondary); }
+
+        /* ============================================
+           Leadership Grid
+           ============================================ */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-6);
+        }
+
+        .leadership-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: border-color var(--transition-base);
+        }
+
+        .leadership-card:hover,
+        .leadership-card:focus-within { border-color: var(--color-border-accent); }
+
+        .leadership-card__title {
+            font-size: var(--text-lg);
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .leadership-card__org {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-accent);
+            margin-bottom: var(--space-1);
+        }
+
+        .leadership-card__date {
+            font-size: var(--text-sm);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-4);
+        }
+
+        .leadership-card__description {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           Publications Section
+           ============================================ */
+        .memberships {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin-bottom: var(--space-8);
+        }
+
+        .membership-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-accent-muted);
+            border: 1px solid var(--color-border-accent);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .publication {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
+
+        .publication__text {
+            font-size: var(--text-base);
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .publication__author {
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .publication__journal {
+            font-style: italic;
+            color: var(--color-text-tertiary);
+        }
+
+        .publication__note {
+            font-size: var(--text-sm);
+            font-style: italic;
+            color: var(--color-text-tertiary);
+            margin-top: var(--space-4);
+        }
+
+        /* ============================================
+           Contact Section
+           ============================================ */
+        .contact {
+            text-align: center;
+            padding: var(--space-20) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact__title {
+            font-size: var(--text-3xl);
+            font-weight: 400;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .contact__subtitle {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-style: italic;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-10);
+        }
+
+        .contact__links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--space-6) var(--space-10);
+        }
+
+        .contact__link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-text-secondary);
+            font-size: var(--text-base);
+            transition: color var(--transition-fast);
+        }
+
+        .contact__link:hover,
+        .contact__link:focus { color: var(--color-accent); }
+
+        .contact__link svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .footer {
+            text-align: center;
+            padding: var(--space-6) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer__text {
+            font-size: var(--text-sm);
+            color: var(--color-text-tertiary);
+        }
+
+        /* ============================================
+           Responsive Design
+           ============================================ */
+        @media (max-width: 1024px) {
+            .skills-grid { grid-template-columns: 1fr; }
+            .leadership-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --space-20: 4rem;
+                --space-24: 5rem;
+            }
+
+            .nav__toggle { display: flex; }
+
+            .nav__menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(26, 31, 46, 0.98);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: var(--space-4);
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav__menu--open { display: flex; }
+
+            .nav__link {
+                display: block;
+                padding: var(--space-3) var(--space-4);
+            }
+
+            .nav__link::after { display: none; }
+
+            .hero__content { padding: var(--space-4); }
+
+            .section__header { margin-bottom: var(--space-8); }
+
+            .timeline__item { padding-left: var(--space-6); }
+
+            .education-card {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+
+            .education-card__year { font-size: var(--text-2xl); }
+
+            .contact__links {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-4);
+            }
+        }
+
+        /* ============================================
+           Animation Classes
+           ============================================ */
+        @media (prefers-reduced-motion: no-preference) {
+            .fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity var(--transition-slow), transform var(--transition-slow);
+            }
+
+            .fade-in--visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .stagger-1 { transition-delay: 100ms; }
+            .stagger-2 { transition-delay: 200ms; }
+            .stagger-3 { transition-delay: 300ms; }
+            .stagger-4 { transition-delay: 400ms; }
+        }
+
+        /* ============================================
+           Print Styles
+           ============================================ */
+        @media print {
+            .nav, .hero__scroll, .skip-link { display: none; }
+            body { background: white; color: black; }
+            .hero { min-height: auto; padding: 2rem 0; }
+            .hero__image, .hero__overlay { display: none; }
+            .section { padding: 1.5rem 0; break-inside: avoid; }
+            a { color: inherit; }
+            a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <div class="container nav__inner">
+            <a href="#" class="nav__logo" aria-label="Robert Nagy - Home">Robert<span>.</span></a>
+            <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav__menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="#about" class="nav__link" role="menuitem">About</a></li>
+                <li role="none"><a href="#skills" class="nav__link" role="menuitem">Skills</a></li>
+                <li role="none"><a href="#experience" class="nav__link" role="menuitem">Experience</a></li>
+                <li role="none"><a href="#education" class="nav__link" role="menuitem">Education</a></li>
+                <li role="none"><a href="#leadership" class="nav__link" role="menuitem">Leadership</a></li>
+                <li role="none"><a href="#publications" class="nav__link" role="menuitem">Publications</a></li>
+                <li role="none"><a href="#contact" class="nav__link" role="menuitem">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" role="banner">
+        <div class="hero__media">
+            <img src="header.png" alt="" class="hero__image" role="presentation">
+            <div class="hero__overlay" aria-hidden="true"></div>
+        </div>
+        <div class="hero__content">
+            <h1 class="hero__title">Robert Nagy, PhD</h1>
+            <p class="hero__subtitle">Bio-Data Scientist · Space Health Researcher · HPC Specialist</p>
+            <p class="hero__description">Bridging the frontiers of life sciences, artificial intelligence, and human space exploration</p>
+        </div>
+        <div class="hero__scroll" aria-hidden="true">
+            <div class="hero__scroll-icon"></div>
+            <span>Scroll</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main-content">
+        <!-- About Section -->
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">About</span>
+                    <h2 class="section__title" id="about-title">Professional Summary</h2>
+                </header>
+                <p class="summary fade-in">
+                    Multidisciplinary <strong>Data Scientist</strong> and <strong>Biomedical Engineer</strong> with over 8 years of experience at the intersection of life sciences, High-Performance Computing (HPC), and strategic analysis. Expert in developing <strong>AI/ML pipelines</strong> for healthcare and Earth Observation (EO) data, synthetic data generation, and simulation modelling. Currently completing a <strong>Master's in Space Studies</strong> with a focus on radiation biology and robotic exploration. Aspiring to leverage cross-domain expertise to advance medical capabilities for <strong>human space exploration</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section section--border" id="skills" aria-labelledby="skills-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">Expertise</span>
+                    <h2 class="section__title" id="skills-title">Core Technical Skills</h2>
+                </header>
+                <div class="skills-grid">
+                    <article class="skill-card fade-in stagger-1">
+                        <header class="skill-card__header">
+                            <div class="skill-card__icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                                </svg>
+                            </div>
+                            <h3 class="skill-card__title">Data Science & AI</h3>
+                        </header>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">R</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">GANs</span>
+                            <span class="skill-tag">Transformers</span>
+                            <span class="skill-tag">Diffusion Models</span>
+                            <span class="skill-tag">Synthetic Data</span>
+                            <span class="skill-tag">Causal Inference</span>
+                            <span class="skill-tag">Bayesian Analysis</span>
+                        </div>
+                    </article>
+                    <article class="skill-card fade-in stagger-2">
+                        <header class="skill-card__header">
+                            <div class="skill-card__icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+                                </svg>
+                            </div>
+                            <h3 class="skill-card__title">Computing & DevOps</h3>
+                        </header>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HPC (ARCHER2)</span>
+                            <span class="skill-tag">Linux/Bash</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Ansible</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Cloud Infrastructure</span>
+                            <span class="skill-tag">Cylc Workflow</span>
+                            <span class="skill-tag">Apache Airflow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Slurm</span>
+                        </div>
+                    </article>
+                    <article class="skill-card fade-in stagger-3">
+                        <header class="skill-card__header">
+                            <div class="skill-card__icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                                </svg>
+                            </div>
+                            <h3 class="skill-card__title">Space & Bio-Science</h3>
+                        </header>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Radiation Biology</span>
+                            <span class="skill-tag">Health Tech Assessment</span>
+                            <span class="skill-tag">Earth Observation</span>
+                            <span class="skill-tag">Satellite Imagery</span>
+                            <span class="skill-tag">Clinical Decision Support</span>
+                            <span class="skill-tag">NLP for Healthcare</span>
+                            <span class="skill-tag">AFM/Optical Tweezers</span>
+                        </div>
+                    </article>
+                    <article class="skill-card fade-in stagger-4">
+                        <header class="skill-card__header">
+                            <div class="skill-card__icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+                                </svg>
+                            </div>
+                            <h3 class="skill-card__title">Languages</h3>
+                        </header>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English (C2 – Proficient)</span>
+                            <span class="skill-tag">Hungarian (Native)</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section section--border" id="experience" aria-labelledby="experience-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">Career</span>
+                    <h2 class="section__title" id="experience-title">Professional Experience</h2>
+                </header>
+                <div class="timeline">
+                    <!-- EPCC Role -->
+                    <article class="timeline__item fade-in">
+                        <div class="timeline__marker" aria-hidden="true"></div>
+                        <header class="timeline__header">
+                            <h3 class="timeline__title">Applications Consultant (HPC & Data Science)</h3>
+                            <div class="timeline__meta">
+                                <span class="timeline__company">EPCC, University of Edinburgh</span>
+                                <time class="timeline__date" datetime="2021-10/2025-07">Oct 2021 – Jul 2025</time>
+                            </div>
+                        </header>
+                        <div class="timeline__content">
+                            <p class="timeline__intro">Provided scientific and technical consultancy on High-Performance Computing architectures, accelerator technologies, and data engineering for academic and industrial clients across multiple high-impact projects:</p>
+                            <div class="project-grid">
+                                <div class="project-card">
+                                    <h4 class="project-card__title">UK Met Office: Weather Prediction AI Pipeline</h4>
+                                    <p class="project-card__description">Designed and implemented automated software modules for data search, download, and customisation using EUMETSAT satellite data streams. Integrated pipeline into the Cylc workflow engine to streamline data ingestion for a novel AI-based weather prediction model.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">Python</span>
+                                        <span class="project-card__tag">Bash</span>
+                                        <span class="project-card__tag">Cylc</span>
+                                        <span class="project-card__tag">EUMETSAT</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">UK Space Agency: DataSlipstream</h4>
+                                    <p class="project-card__description">Developed modular scripts for automated satellite data sourcing from the ESA Copernicus Sentinel constellation. Embedded workflows into Apache Airflow DAGs to enable scalable and reproducible Earth Observation data processing.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">Python</span>
+                                        <span class="project-card__tag">Apache Airflow</span>
+                                        <span class="project-card__tag">Sentinel EO</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">Cerebras CS-2: Wafer-Scale AI Accelerator</h4>
+                                    <p class="project-card__description">Explored capabilities of the Cerebras CS-2 wafer-scale AI accelerator by training a 111M parameter GPT-3 model for potential healthcare AI applications. Configured and programmed the system, navigating an evolving proprietary software stack.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">PyTorch</span>
+                                        <span class="project-card__tag">Slurm</span>
+                                        <span class="project-card__tag">LLM Training</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">KenyaMET: High-Resolution Weather Modelling</h4>
+                                    <p class="project-card__description">Deployed GFS/WRF-ARW numerical weather prediction models achieving 1km resolution atmospheric modelling around Kenya's major mountain peaks. Built, configured, and executed models on virtual machines and the ARCHER2 supercomputer.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">WRF-ARW</span>
+                                        <span class="project-card__tag">ARCHER2</span>
+                                        <span class="project-card__tag">Fortran</span>
+                                        <span class="project-card__tag">Docker</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">DDI DataLoch: Health Data Platform</h4>
+                                    <p class="project-card__description">Contributed to building Scotland's collaborative health data platform aggregating routine healthcare and social care data for research. Provided tailored health data assets to researchers and enhanced the R/RStudio and SQL codebase.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">R/RStudio</span>
+                                        <span class="project-card__tag">SQL</span>
+                                        <span class="project-card__tag">Health Data</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- PhD Role -->
+                    <article class="timeline__item fade-in">
+                        <div class="timeline__marker" aria-hidden="true"></div>
+                        <header class="timeline__header">
+                            <h3 class="timeline__title">Doctoral Researcher (Clinical Data Science)</h3>
+                            <div class="timeline__meta">
+                                <span class="timeline__company">University of Edinburgh</span>
+                                <time class="timeline__date" datetime="2017-10/2025-05">Oct 2017 – May 2025</time>
+                            </div>
+                        </header>
+                        <div class="timeline__content">
+                            <p class="timeline__intro">Addressed the need for rigorous, real-world data-driven Budget Impact Analysis (BIA) in NHS advanced breast cancer care, where traditional assessments often rely on assumptions risking inaccurate forecasts.</p>
+                            <div class="project-grid">
+                                <div class="project-card">
+                                    <h4 class="project-card__title">Patient-Level Simulation Model for Budget Impact Analysis</h4>
+                                    <p class="project-card__description">Developed a probabilistic, patient-level simulation model (R/Shiny) for BIA targeting post-menopausal women with ER+/Her2- metastatic breast cancer. Linked regional and national datasets to reconstruct clinical pathways, estimating incidence, prevalence, costs, and QALYs over a five-year horizon. Revealed significant discrepancies with existing SMC budget impact tools.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">R/Shiny</span>
+                                        <span class="project-card__tag">Simulation</span>
+                                        <span class="project-card__tag">Health Economics</span>
+                                        <span class="project-card__tag">QALYs</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">Post-Adoption Auditing Framework</h4>
+                                    <p class="project-card__description">Pioneered a framework for healthcare service evaluation, optimising resource allocation based on data intelligence. Managed complex stakeholder relationships across clinical and academic domains.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">HTA</span>
+                                        <span class="project-card__tag">Value-Based Healthcare</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- MyWay Role -->
+                    <article class="timeline__item fade-in">
+                        <div class="timeline__marker" aria-hidden="true"></div>
+                        <header class="timeline__header">
+                            <h3 class="timeline__title">Research Data Analyst</h3>
+                            <div class="timeline__meta">
+                                <span class="timeline__company">MyWay Digital Health Ltd</span>
+                                <time class="timeline__date" datetime="2021-09/2024-06">Sep 2021 – Jun 2024</time>
+                            </div>
+                        </header>
+                        <div class="timeline__content">
+                            <p class="timeline__intro">Worked on multiple projects using Type 2 Diabetes patient records, developing ML/AI solutions for clinical decision support and predictive modelling.</p>
+                            <div class="project-grid">
+                                <div class="project-card">
+                                    <h4 class="project-card__title">Innovate UK: MyDiabetesIQ Platform</h4>
+                                    <p class="project-card__description">Led data engineering for prediction of critical hypo/hyperglycaemia events within 24–48 hrs post-hospital-admission using high-frequency time-series patient data from Abbott and Roche devices. Generated synthetic micro- and larger datasets (tabular, time-series) using GAN-based methods. Applied AI/ML including random forests, GANs, and transformers.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">GANs</span>
+                                        <span class="project-card__tag">Transformers</span>
+                                        <span class="project-card__tag">Time-Series</span>
+                                        <span class="project-card__tag">Synthetic Data</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">CAUSALFound: Foundation Model for Treatment Effect Prediction</h4>
+                                    <p class="project-card__description">Contributing to development of a causal foundation model enabling real-time, personalised treatment effect predictions. Evaluating and implementing diffusion model-based synthetic patient data generation methods to support robust trial emulation and deep learning for individualised clinical decision support using Scotland's comprehensive health data infrastructure.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">Diffusion Models</span>
+                                        <span class="project-card__tag">Causal Inference</span>
+                                        <span class="project-card__tag">Foundation Models</span>
+                                        <span class="project-card__tag">EHR</span>
+                                    </div>
+                                </div>
+                                <div class="project-card">
+                                    <h4 class="project-card__title">PhD Summer Internship: Clinical Decision Aid</h4>
+                                    <p class="project-card__description">Inspected, cleaned, and transformed high-frequency clinical and patient-recorded vitality data to feed clinical decision-aid machine learning algorithms providing insights for both clinicians and patients.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">Data Engineering</span>
+                                        <span class="project-card__tag">ML Pipelines</span>
+                                        <span class="project-card__tag">T2D</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Semmelweis Role -->
+                    <article class="timeline__item fade-in">
+                        <div class="timeline__marker" aria-hidden="true"></div>
+                        <header class="timeline__header">
+                            <h3 class="timeline__title">Departmental Engineer & Researcher</h3>
+                            <div class="timeline__meta">
+                                <span class="timeline__company">Semmelweis University, Dept. of Biophysics</span>
+                                <time class="timeline__date" datetime="2014-02/2016-08">Feb 2014 – Aug 2016</time>
+                            </div>
+                        </header>
+                        <div class="timeline__content">
+                            <div class="project-grid">
+                                <div class="project-card">
+                                    <h4 class="project-card__title">Biophysics Research: AFM & Optical Tweezers</h4>
+                                    <p class="project-card__description">Designed and conducted experiments using atomic force microscopy (AFM) and optical tweezers to analyse biological responses at the nanoscale. Mentored medical students in research methodologies and experimental design.</p>
+                                    <div class="project-card__tags">
+                                        <span class="project-card__tag">AFM</span>
+                                        <span class="project-card__tag">Optical Tweezers</span>
+                                        <span class="project-card__tag">Nanomechanics</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section section--border" id="education" aria-labelledby="education-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">Academic Background</span>
+                    <h2 class="section__title" id="education-title">Education</h2>
+                </header>
+                <div class="education-grid">
+                    <article class="education-card fade-in">
+                        <div class="education-card__year">2025</div>
+                        <div class="education-card__content">
+                            <h3 class="education-card__degree">Master of Space Studies (Space Science & Exploration)</h3>
+                            <p class="education-card__institution">International Space University (ISU), Strasbourg, France</p>
+                            <p class="education-card__detail"><strong>Focus:</strong> Economic, engineering, and biomedical aspects of spaceflight. Member of interdisciplinary team designing next-generation robotic exploration missions. Individual research conducting deep review of radiation biology to understand mechanisms of space radiation exposure and develop efficient countermeasures.</p>
+                        </div>
+                    </article>
+                    <article class="education-card fade-in">
+                        <div class="education-card__year">2025</div>
+                        <div class="education-card__content">
+                            <h3 class="education-card__degree">PhD in Data Science for Health Technology Assessment</h3>
+                            <p class="education-card__institution">University of Edinburgh, UK</p>
+                            <p class="education-card__detail"><strong>Thesis:</strong> Data intelligence for the evaluation of new treatments for breast cancer. Developed probabilistic patient-level simulation model leveraging Scotland's health data infrastructure, demonstrating value of real-world data-driven budget impact analysis for NHS fiscal sustainability and value-based healthcare.</p>
+                        </div>
+                    </article>
+                    <article class="education-card fade-in">
+                        <div class="education-card__year">2017</div>
+                        <div class="education-card__content">
+                            <h3 class="education-card__degree">MSc in Data Science for Business</h3>
+                            <p class="education-card__institution">University of Stirling, UK</p>
+                            <p class="education-card__detail"><strong>Thesis:</strong> Natural language processing in clinical decision-making for targeted cancer treatment. Explored NLP/Information Extraction using GATE Developer platform and SNOMED-CT for automating codification of biomedical concepts from unstructured NHS pathology reports.</p>
+                        </div>
+                    </article>
+                    <article class="education-card fade-in">
+                        <div class="education-card__year">2016</div>
+                        <div class="education-card__content">
+                            <h3 class="education-card__degree">BSc in Molecular Bionics Engineering</h3>
+                            <p class="education-card__institution">Pázmány Péter Catholic University, Hungary</p>
+                            <p class="education-card__detail"><strong>Thesis:</strong> Self-assembly and technological potential of amyloid β-peptide fibrils. Used advanced AFM techniques including nanomechanical and conductance measurements to examine nano-mesh networks, demonstrating potential for engineered amyloid systems as building blocks for nano-biotechnological applications. <strong>Specialization:</strong> Medical Biotechnology.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section class="section section--border" id="leadership" aria-labelledby="leadership-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">Community</span>
+                    <h2 class="section__title" id="leadership-title">Leadership & Volunteering</h2>
+                </header>
+                <div class="leadership-grid">
+                    <article class="leadership-card fade-in">
+                        <h3 class="leadership-card__title">Executive Committee Member</h3>
+                        <p class="leadership-card__org">UK Space LABS</p>
+                        <time class="leadership-card__date" datetime="2024-09">Sep 2024 – Present</time>
+                        <p class="leadership-card__description">Leading the association's website development and strategic communications to optimise collaboration between UK organisations and the space life sciences sector. Supporting high-level discussions regarding the development of a sovereign UK human spaceflight programme.</p>
+                    </article>
+                    <article class="leadership-card fade-in">
+                        <h3 class="leadership-card__title">Data Carpentry Instructor</h3>
+                        <p class="leadership-card__org">The University of Edinburgh</p>
+                        <time class="leadership-card__date" datetime="2020-02/2021-06">Feb 2020 – Jun 2021</time>
+                        <p class="leadership-card__description">Certified instructor delivering pedagogy-focused data upskilling workshops. Developed the website for the UKRI Data Science Training in Health and Bioscience (DaSH) project using GitHub, HTML, CSS, JavaScript, Jekyll, and YAML.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section class="section section--border" id="publications" aria-labelledby="publications-title">
+            <div class="container container--narrow">
+                <header class="section__header">
+                    <span class="section__label">Research & Affiliations</span>
+                    <h2 class="section__title" id="publications-title">Publications & Memberships</h2>
+                </header>
+                <div class="memberships" role="list" aria-label="Professional memberships">
+                    <span class="membership-badge" role="listitem">Aerospace Medical Association (AsMA) – 2025</span>
+                    <span class="membership-badge" role="listitem">Royal Aeronautical Society (RAeS) – 2025</span>
+                </div>
+                <article class="publication fade-in">
+                    <p class="publication__text">
+                        Hrabovszky E, Molnar CS, <span class="publication__author">Nagy R</span>, et al. (2012). "Glutamatergic and GABAergic Innervation of Human Gonadotropin-Releasing Hormone-I Neurons." <span class="publication__journal">Endocrinology</span>, 153(6), 2766–2776.
+                    </p>
+                </article>
+                <p class="publication__note">Ongoing research outputs regarding Space Radiation Countermeasures, Causal Foundation Models for Healthcare, and Budget Impact Analysis methodologies are currently in development.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 class="contact__title" id="contact-title">Let's Connect</h2>
+                <p class="contact__subtitle">Exploring the frontiers of space health and data science together</p>
+                <div class="contact__links">
+                    <a href="mailto:robn.career@gmail.com" class="contact__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <span>robn.career@gmail.com</span>
+                    </a>
+                    <a href="tel:+447778194676" class="contact__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        </svg>
+                        <span>+44 7778 194676</span>
+                    </a>
+                    <a href="https://linkedin.com/in/robn01" target="_blank" rel="noopener noreferrer" class="contact__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <span class="contact__link" aria-label="Location: Strasbourg, France">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                        <span>Strasbourg, France</span>
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="footer__text">© <span id="current-year">2025</span> Robert Nagy. Designed with precision for space and science.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const nav = document.getElementById('nav');
+        const handleScroll = () => {
+            nav.classList.toggle('nav--scrolled', window.scrollY > 80);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('nav__menu--open');
+        });
+
+        navMenu.querySelectorAll('.nav__link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('nav__menu--open');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('nav__menu--open')) {
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('nav__menu--open');
+                navToggle.focus();
+            }
+        });
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in--visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.fade-in').forEach(el => el.classList.add('fade-in--visible'));
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.setAttribute('tabindex', '-1');
+                    target.focus({ preventScroll: true });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
